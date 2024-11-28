@@ -1,59 +1,54 @@
-# :two_hearts: Health Care Chat-Bot 🤖
-Project for the 6th Semester Subject -> Machine Learning
+📚 Overview
 
-Health Care Chat-Bot is a Healthcare Domain Chatbot to simulate the predictions of a General Physician.
+In today's fast-paced world, chatbots are revolutionizing customer service across various industries. Whether it's answering questions, providing support, or even making recommendations, chatbots use artificial intelligence (AI) to interact with users.
 
-## :page_with_curl: Brief
-Through chatbots one can communicate with text or voice interface and get reply through artificial intelligence
+In the healthcare industry, chatbots are becoming increasingly popular. Hospitals, clinics, and private healthcare providers use these bots to engage with patients online, helping them find the right specialists, book appointments, and get access to the correct treatments. With this Health Care Chat-Bot, we aim to extend these benefits by providing an AI-powered assistant that can guide you to the right diagnosis and recommend doctors based on your symptoms.
 
-Typically, a chat bot will communicate with a real person. 
-Chat bots are used in applications such as 
+By leveraging machine learning and a decision tree classifier, the bot simulates the role of a general physician, helping users understand what might be wrong with them based on their symptoms.
+💡 Key Features
 
-1. E-commerce customer service,
-2. Call centres, 
-3. Internet gaming. 
+    Registration & Login System: Secure user authentication with a simple sign-up and login process.
+    Chatbot Interface: A GUI-based chatbot that interacts with users, asking questions about symptoms to diagnose potential health conditions.
+    Disease Diagnosis: The bot uses a machine learning model (Decision Tree Classifier) to predict possible diseases based on user responses.
+    Doctor Recommendations: Once a disease is diagnosed, the bot recommends an appropriate doctor and provides clickable links to their profiles.
+    24/7 Healthcare Support: The chatbot works around the clock, offering support whenever needed.
 
-Chatbots are programs built to automatically engage with received messages. Chatbots can be programmed to respond the same way each time, to respond differently to messages containing certain keywords and even to use machine learning to adapt their responses to fit the situation. 
-A developing number of hospitals, nursing homes, and even private centres, presently utilize online Chatbots for human services on their sites. These bots connect with potential patients visiting the site, helping them discover specialists, booking their appointments, and getting them access to the correct treatment. 
-In any case, the utilization of artificial intelligence in an industry where individuals’ lives could be in question, still starts misgivings in individuals. It brings up issues about whether the task mentioned above ought to be assigned to human staff. This healthcare chatbot system will help hospitals to provide healthcare support online 24 x 7, it answers deep as well as general questions. It also helps to generate leads and automatically delivers the information of leads to sales. By asking the questions in series it helps patients by guiding what exactly he/she is looking for. 
+🔧 Modules Used
 
-## :card_index: Features
-- Register Screen.
-- Sign-in Screen.
-- Generates database for user login system.
-- Offers you a GUI Based Chatbot for patients for diagnosing. [A pragmatic Approach for Diagnosis]
-- Reccomends an appropriate doctor to you for the following symptom.
+This project relies on several Python modules to function correctly:
 
-## :scroll: Modules Used
-Our	program	uses	a	number	of	python	modules	to	work	properly:
+    tkinter - For creating the graphical user interface (GUI).
+    os - To interact with the operating system and handle files.
+    webbrowser - For opening links to doctor profiles and other external websites.
+    numpy - For numerical computations.
+    pandas - For handling and manipulating data.
+    matplotlib - For data visualization (though it might not be used in the current version, it's included in case you want to visualize some data).
 
-1. tkinter 
-1. os
-1. webbrowser
-1. numpy
-1. pandas
-1. matplotlib
+📥 Installation
 
-## :white_square_button: Installation 
-Install the following package by typing the following in CMD
+To get started with the Health Care Chat-Bot, you'll need to install the required Python modules. Here's how you can do that:
 
-- `pip install numpy`
-- `pip install pandas`
-- `pip install matplotlib`
+    Open your command prompt or terminal.
+    Install the necessary packages by typing the following commands:
 
-To make sure it is installed correctly, open IDLE and execute :
+pip install numpy
+pip install pandas
+pip install matplotlib
 
-- `import numpy`
-- `import pandas`
-- `import matplotlib`
+    Once the installation is complete, open your Python IDLE (or any other code editor you prefer) and run the following imports to verify the installation:
 
-If no errors appeared then the installation is done correctly.
-Then, Go to your directory and run the file `QuestionDiagonosisTkinter.py`
+import numpy
+import pandas
+import matplotlib
 
+If no errors appear, you're all set!
 
-## :suspect: Project Members
+Finally, navigate to your project directory and run the file QuestionDiagnosisTkinter.py to start the chatbot.
+🚀 How to Use
 
-- [Aryan Veturekar](https://github.com/aryanveturekar)
-- [Himanshu Singh](https://github.com/himanshusiingh)
-- [Danish Shaikh](https://github.com/danishsshaikh)
+    Run the Program: Once the required packages are installed, run the file QuestionDiagnosisTkinter.py.
+    Sign Up or Log In: Create a new account or log in with your existing credentials.
+    Interact with the Chatbot: The chatbot will start by asking you a series of questions to diagnose your symptoms.
+    Get Your Diagnosis: Based on your responses, the bot will suggest possible diseases and recommend doctors.
+    Consult the Recommended Doctors: Click on the provided links to visit the doctors' profiles and book appointments if necessary.
 
