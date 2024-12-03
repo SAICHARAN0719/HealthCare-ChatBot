@@ -1,16 +1,13 @@
-
-# Importing the libraries
 from tkinter import *
-from tkinter import messagebox                           
-import os            
+from tkinter import messagebox
+import os
 import webbrowser
 
 import numpy as np
 import pandas as pd
-   
 
 class HyperlinkManager:
-      
+
     def __init__(self, text):
         self.text = text
         self.text.tag_config("hyper", foreground="blue", underline=1)
@@ -84,7 +81,7 @@ def print_disease(node):
         #print(node)
         node = node[0]
         #print(len(node))
-        val  = node.nonzero() 
+        val  = node.nonzero()
         #print(val)
         disease = labelencoder.inverse_transform(val[0])
         return disease
@@ -96,7 +93,7 @@ def recurse(node, depth):
                 name = feature_name[node]
                 threshold = tree_.threshold[node]
                 yield name + " ?"
-                
+
 #                ans = input()
                 ans = ans.lower()
                 if ans == 'yes':
@@ -114,33 +111,33 @@ def recurse(node, depth):
 #                print( "You may have " +  present_disease )
 #                print()
                 strData="You may have :" +  str(present_disease)
-               
-                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
-                
-                red_cols = dimensionality_reduction.columns 
+
+                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
+
+                red_cols = dimensionality_reduction.columns
                 symptoms_given = red_cols[dimensionality_reduction.loc[present_disease].values[0].nonzero()]
 #                print("symptoms present  " + str(list(symptoms_present)))
 #                print()
                 strData="symptoms present:  " + str(list(symptoms_present))
-                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
-#                print("symptoms given "  +  str(list(symptoms_given)) )  
+                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
+#                print("symptoms given "  +  str(list(symptoms_given)) )
 #                print()
                 strData="symptoms given: "  +  str(list(symptoms_given))
-                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
+                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
                 confidence_level = (1.0*len(symptoms_present))/len(symptoms_given)
 #                print("confidence level is " + str(confidence_level))
 #                print()
                 strData="confidence level is: " + str(confidence_level)
-                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
+                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
 #                print('The model suggests:')
 #                print()
                 strData='The model suggests:'
-                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
+                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
                 row = doctors[doctors['disease'] == present_disease[0]]
 #                print('Consult ', str(row['name'].values))
 #                print()
                 strData='Consult '+ str(row['name'].values)
-                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
+                QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
 #                print('Visit ', str(row['link'].values))
                 #print(present_disease[0])
                 hyperlink = HyperlinkManager(QuestionDigonosis.objRef.txtDigonosis)
@@ -148,9 +145,9 @@ def recurse(node, depth):
                 def click1():
                     webbrowser.open_new(str(row['link'].values[0]))
                 QuestionDigonosis.objRef.txtDigonosis.insert(INSERT, strData, hyperlink.add(click1))
-                #QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')                  
+                #QuestionDigonosis.objRef.txtDigonosis.insert(END,str(strData)+'\n')
                 yield strData
-        
+
 def tree_to_code(tree, feature_names):
         global tree_,feature_name,symptoms_present
         tree_ = tree.tree_
@@ -160,12 +157,12 @@ def tree_to_code(tree, feature_names):
             for i in tree_.feature
         ]
         #print("def tree({}):".format(", ".join(feature_names)))
-        symptoms_present = []   
+        symptoms_present = []
 #        recurse(0, 1)
-    
+
 
 def execute_bot():
-#    print("Please reply with yes/Yes or no/No for the following symptoms")    
+#    print("Please reply with yes/Yes or no/No for the following symptoms")
     tree_to_code(classifier,cols)
 
 
@@ -199,72 +196,72 @@ record['link']
 # Execute the bot and see it in Action
 #execute_bot()
 
-
 class QuestionDigonosis(Frame):
-    objIter=None
-    objRef=None
-    def __init__(self,master=None):
+    objIter = None
+    objRef = None
+
+    def __init__(self, master=None):
         master.title("Question")
-        # root.iconbitmap("")
-        master.state("z")
-#        master.minsize(700,350)
-        QuestionDigonosis.objRef=self
+        # Remove or fix the invalid state argument
+        # master.state("z")  # This line is invalid
+        # You can either remove it or set it to "normal"
+        master.state("normal")  # Or use another valid state like "withdrawn"
+        QuestionDigonosis.objRef = self
         super().__init__(master=master)
-        self["bg"]="light blue"
+        self["bg"] = "light blue"
         self.createWidget()
-        self.iterObj=None
+        self.iterObj = None
 
     def createWidget(self):
-        self.lblQuestion=Label(self,text="Question",width=12,bg="bisque")
-        self.lblQuestion.grid(row=0,column=0,rowspan=4)
+        self.lblQuestion = Label(self, text="Question", width=12, bg="bisque")
+        self.lblQuestion.grid(row=0, column=0, rowspan=4)
 
-        self.lblDigonosis = Label(self, text="Digonosis",width=12,bg="bisque")
-        self.lblDigonosis.grid(row=4, column=0,sticky="n",pady=5)
+        self.lblDigonosis = Label(self, text="Digonosis", width=12, bg="bisque")
+        self.lblDigonosis.grid(row=4, column=0, sticky="n", pady=5)
 
         # self.varQuestion=StringVar()
-        self.txtQuestion = Text(self, width=100,height=4)
-        self.txtQuestion.grid(row=0, column=1,rowspan=4,columnspan=20)
+        self.txtQuestion = Text(self, width=100, height=4)
+        self.txtQuestion.grid(row=0, column=1, rowspan=4, columnspan=20)
 
-        self.varDiagonosis=StringVar()
-        self.txtDigonosis =Text(self, width=100,height=14)
-        self.txtDigonosis.grid(row=4, column=1,columnspan=20,rowspan=20,pady=5)
+        self.varDiagonosis = StringVar()
+        self.txtDigonosis = Text(self, width=100, height=14)
+        self.txtDigonosis.grid(row=4, column=1, columnspan=20, rowspan=20, pady=5)
 
-        self.btnNo=Button(self,text="No",width=12,bg="bisque", command=self.btnNo_Click)
-        self.btnNo.grid(row=25,column=0)
-        self.btnYes = Button(self, text="Yes",width=12,bg="bisque", command=self.btnYes_Click)
-        self.btnYes.grid(row=25, column=1,columnspan=20,sticky="e")
+        self.btnNo = Button(self, text="No", width=12, bg="bisque", command=self.btnNo_Click)
+        self.btnNo.grid(row=25, column=0)
+        self.btnYes = Button(self, text="Yes", width=12, bg="bisque", command=self.btnYes_Click)
+        self.btnYes.grid(row=25, column=1, columnspan=20, sticky="e")
 
-        self.btnClear = Button(self, text="Clear",width=12,bg="bisque", command=self.btnClear_Click)
+        self.btnClear = Button(self, text="Clear", width=12, bg="bisque", command=self.btnClear_Click)
         self.btnClear.grid(row=27, column=0)
-        self.btnStart = Button(self, text="Start",width=12,bg="bisque", command=self.btnStart_Click)
-        self.btnStart.grid(row=27, column=1,columnspan=20,sticky="e")
+        self.btnStart = Button(self, text="Start", width=12, bg="bisque", command=self.btnStart_Click)
+        self.btnStart.grid(row=27, column=1, columnspan=20, sticky="e")
+
     def btnNo_Click(self):
-        global val,ans
-        global val,ans
-        ans='no'
-        str1=QuestionDigonosis.objIter.__next__()
-        self.txtQuestion.delete(0.0,END)
-        self.txtQuestion.insert(END,str1+"\n")
-        
+        global val, ans
+        ans = 'no'
+        str1 = QuestionDigonosis.objIter.__next__()
+        self.txtQuestion.delete(0.0, END)
+        self.txtQuestion.insert(END, str1 + "\n")
+
     def btnYes_Click(self):
-        global val,ans
-        ans='yes'
-        self.txtDigonosis.delete(0.0,END)
-        str1=QuestionDigonosis.objIter.__next__()
-        
-#        self.txtDigonosis.insert(END,str1+"\n")
-        
+        global val, ans
+        ans = 'yes'
+        self.txtDigonosis.delete(0.0, END)
+        str1 = QuestionDigonosis.objIter.__next__()
+
     def btnClear_Click(self):
-        self.txtDigonosis.delete(0.0,END)
-        self.txtQuestion.delete(0.0,END)
+        self.txtDigonosis.delete(0.0, END)
+        self.txtQuestion.delete(0.0, END)
+
     def btnStart_Click(self):
         execute_bot()
-        self.txtDigonosis.delete(0.0,END)
-        self.txtQuestion.delete(0.0,END)
-        self.txtDigonosis.insert(END,"Please Click on Yes or No for the Above symptoms in Question")                  
-        QuestionDigonosis.objIter=recurse(0, 1)
-        str1=QuestionDigonosis.objIter.__next__()
-        self.txtQuestion.insert(END,str1+"\n")
+        self.txtDigonosis.delete(0.0, END)
+        self.txtQuestion.delete(0.0, END)
+        self.txtDigonosis.insert(END, "Please Click on Yes or No for the Above symptoms in Question")
+        QuestionDigonosis.objIter = recurse(0, 1)
+        str1 = QuestionDigonosis.objIter.__next__()
+        self.txtQuestion.insert(END, str1 + "\n")
 
 
 class MainForm(Frame):
@@ -293,7 +290,7 @@ class MainForm(Frame):
         self.lblTeam2.pack()
         self.lblTeam3=Label(self, text="Danish Shaikh", bg="RoyalBlue3", width = "250", height = "1", font=("Calibri", 13))
         self.lblTeam3.pack()
-        
+
     def lblLogin_Click(self):
         self.destroyPackWidget(MainForm.main_Root)
         frmLogin=Login(MainForm.main_Root)
@@ -305,7 +302,7 @@ class MainForm(Frame):
 
 
 
-        
+
 class Login(Frame):
     main_Root=None
     def destroyPackWidget(self,parent):
@@ -335,7 +332,7 @@ class Login(Frame):
     def btnLogin_Click(self):
         username1 = self.username_login_entry.get()
         password1 = self.password_login_entry.get()
-        
+
 #        messagebox.showinfo("Failure", self.username1+":"+password1)
         list_of_files = os.listdir()
         if username1 in list_of_files:
@@ -388,12 +385,12 @@ class SignUp(Frame):
         file.write(self.username_entry.get() + "\n")
         file.write(self.password_entry.get())
         file.close()
-        
+
         self.destroyPackWidget(SignUp.main_Root)
-        
+
         self.lblSucess=Label(root, text="Registration Success", fg="green", font=("calibri", 11))
         self.lblSucess.pack()
-        
+
         self.btnSucess=Button(root, text="Click Here to proceed", command=self.btnSucess_Click)
         self.btnSucess.pack()
     def btnSucess_Click(self):
@@ -410,5 +407,3 @@ root = Tk()
 frmMainForm=MainForm(root)
 frmMainForm.pack()
 root.mainloop()
-
-
